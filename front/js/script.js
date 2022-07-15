@@ -6,7 +6,6 @@ async function getAllProducts() {
 
 async function init() {
     let products = await getAllProducts();
-    console.log(products); 
     products.forEach(product => renderProduct(product))
 }
 
