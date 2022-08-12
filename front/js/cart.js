@@ -1,10 +1,12 @@
+//Récupération de contenu du local storage dans un tableau 
 const orderedProducts = JSON.parse(window.localStorage.getItem("productToCart"));
+//récupération d'un produit depuis l'API par son id 
 async function getOneProduct(productId){
     const options = {method: 'get'}; 
     const result = await fetch(`http://localhost:3000/api/products/${productId}`, options);
     return await result.json()
 }
-
+// Afficher des produits dans le paniers
 async function init(){
     orderedProducts.forEach(product => {
         let productFromAPI = getOneProduct(product.id);
@@ -159,6 +161,7 @@ function formVerif (){
     
 }
 formVerif()
+//fonctions de vérifications des champs du formulaire avec les RegEx 
 function nameVerif(){
     let firstName = document.getElementById("firstName")
     let firstNameRegExp = new RegExp('^[A-Za-z éèçàùâôûê]+$','g')
@@ -234,6 +237,8 @@ function emailVerif(){
             return false
         }
     }
+
+//Passer la commande 
 let commander = document.getElementById("order")
 commander.addEventListener("click", async (e)=>{
     e.preventDefault()
@@ -264,7 +269,7 @@ commander.addEventListener("click", async (e)=>{
         const result = await fetch(`http://localhost:3000/api/products/order`, options);
 
         const commande = await result.json()
-        
+
         localStorage.clear()
         window.location.replace(`confirmation.html?id=${commande.orderId}`)
     }

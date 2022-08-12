@@ -1,14 +1,15 @@
+//obtention des produits depuis l'API
 async function getAllProducts() {
     const options = {methode: 'get'}; 
     const result = await fetch('http://localhost:3000/api/products/', options);
     return await result.json()
 }
-
+//Application à chaque produit la fontion renderProduct 
 async function init() {
     let products = await getAllProducts();
     products.forEach(product => renderProduct(product))
 }
-
+// création du code html qui permet l'affichage des produit importtés depuis l'API
 function renderProduct(product) {
     const divrecup = document.getElementById("items");
     const a = document.createElement("a");
@@ -29,9 +30,4 @@ function renderProduct(product) {
     a.appendChild(article);
     divrecup.appendChild(a);
 }
-
-function getItemsSection() {
-    return document.getElementById('items');
-}
-
 init();
