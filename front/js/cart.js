@@ -264,6 +264,8 @@ commander.addEventListener("click", async (e)=>{
         const result = await fetch(`http://localhost:3000/api/products/order`, options);
 
         const commande = await result.json()
+        
+        localStorage.clear()
         window.location.replace(`confirmation.html?id=${commande.orderId}`)
     }
     else {
