@@ -20,6 +20,7 @@ async function init(){
             product.name = produit.name
             product.price = produit.price
             product.imageUrl = produit.imageUrl
+            product.altTxt = produit.altTxt
             window.localStorage.setItem("productToCart", JSON.stringify(orderedProducts))
         })
 
@@ -34,7 +35,7 @@ async function init(){
     
         const img = document.createElement("img")
         
-        img.setAttribute("alt", "photographie d'un canapé")
+        img.setAttribute("alt", product.altTxt)
         
 
         const itemContent = document.createElement("div")
@@ -227,7 +228,6 @@ function emailVerif(){
         let emailRegExp = new RegExp('^[A-Za-z0-9._-]+[@]{1}[A-Za-z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g')
         let emailMsgErr = document.getElementById("emailErrorMsg")
         let testEmail = emailRegExp.test(email.value)
-        console.log(testEmail)
         if (testEmail){
             emailMsgErr.textContent = ""
             return true
@@ -249,8 +249,6 @@ commander.addEventListener("click", async (e)=>{
     const email = document.getElementById("email").value
     const contact = {}
     const products = orderedProducts.map(product => product.id)
-
-    console.log(products)
 
     const orderForm = {
         contact, products
